@@ -24,7 +24,7 @@ const CategoryPage = () => {
 
   return (
     <div>
-      {products.length >= 0 ? <ProductList products={products} /> : <ShowMessage message={"No Product Found..."}/>}
+      {products.length >= 0 ? <ProductList products={products} /> : <ShowMessage message={"Sorry, No Product In This Category..."}/>}
       
     </div>
   );

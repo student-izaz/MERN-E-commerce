@@ -1,10 +1,10 @@
 // src/components/CartSidebar.js
 import React, { useState, useEffect } from "react";
 import "./MobileMenu.css";
+import { useAuth } from "../../Store/auth";
 
 const MobileMenu = ({ isOpen, onClose }) => {
-  // const { cartItem } = useContext(CartContext);
-  const [isMobileMenu, setMobileMenu] = useState('menu')
+  const [isMobileMenu, setMobileMenu] = useState("menu");
 
   // Disable page scrolling when cart is open
   useEffect(() => {
@@ -16,25 +16,26 @@ const MobileMenu = ({ isOpen, onClose }) => {
     return () => (document.body.style.overflow = "auto");
   }, [isOpen]);
 
-
   return (
     <div className={`mobile-menu-sidebar ${isOpen ? "open" : ""}`}>
-      {/* <button className="close-btn" onClick={onClose}>
-        x
-      </button>
-      <h6>SHOPPING CART <span className="noOfCartItem">0</span></h6> */}
-
       <div className="mobile-menu-category">
         <div className="menu-options">
-          <div className={`mobile-menu ${isMobileMenu == 'menu' ? 'active' : ''}`} onClick={()=>setMobileMenu('menu')}>
+          <div
+            className={`mobile-menu ${isMobileMenu == "menu" ? "active" : ""}`}
+            onClick={() => setMobileMenu("menu")}
+          >
             <p>Menu</p>
           </div>
-          <div className={`mobile-category ${isMobileMenu == 'category' ? 'active' : ''}`} onClick={()=>setMobileMenu('category')}>
+          <div
+            className={`mobile-category ${
+              isMobileMenu == "category" ? "active" : ""
+            }`}
+            onClick={() => setMobileMenu("category")}
+          >
             <p>Category</p>
           </div>
         </div>
-        {isMobileMenu == 'menu' ? <MenuList/> : <CategoryList/>}
-        
+        {isMobileMenu == "menu" ? <MenuList /> : <CategoryList />}
       </div>
     </div>
   );
@@ -42,23 +43,38 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
 export default MobileMenu;
 
-
 export const MenuList = () => {
+  const { isLoggedIn } = useAuth();
+
   return (
     <div className="menu-list">
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="#">Sales on Latest Brand</a></li>
-        <li><a href="#">Shop By Brand</a></li>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="#">Sales on Latest Brand</a>
+        </li>
+        <li>
+          <a href="#">Shop By Brand</a>
+        </li>
         <li>Fresh Arrival</li>
         <li>Lawn Collection</li>
         <li>Party & Festive Collection</li>
         <li>Winter Collection</li>
-        <li><a href="/my-account">Login / Register</a></li>
+        {!isLoggedIn ? (
+          <li>
+            <a href="/my-account">Login / Register</a>
+          </li>
+        ) : (
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+        )}
       </ul>
     </div>
-  )
-}
+  );
+};
 
 export const CategoryList = () => {
   return (
@@ -86,5 +102,5 @@ export const CategoryList = () => {
         <li>Charizma Dastan-E-Jashan</li>
       </ul>
     </div>
-  )
-}
+  );
+};

@@ -50,6 +50,7 @@
     display: flex;
     column-gap: 10px;
     padding: 10px 0;
+    position: relative;
   }
   .cart-item-content{
     width: 100%;

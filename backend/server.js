@@ -8,7 +8,8 @@ const productRoutes = require("./routes/productRoutes");
 const categoryRoutes = require('./routes/categoryRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const originalPakistanWearRoutes = require('./routes/originalPakistanWearRoutes');
-const fileUploadRoutes = require('./routes/fileUploadRoutes')
+const fileUploadRoutes = require('./routes/fileUploadRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 dotenv.config();
 const app = express();
@@ -33,6 +34,9 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/product-category', originalPakistanWearRoutes);
 app.use('/api/files', fileUploadRoutes);
+
+// Admin Routes
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

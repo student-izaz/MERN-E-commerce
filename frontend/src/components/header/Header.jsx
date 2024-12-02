@@ -3,13 +3,12 @@ import { useContext } from "react";
 import { CiSearch } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { CiShoppingCart } from "react-icons/ci";
-import { CartContext } from "../../Store/Context";
+// import { CartContext } from "../../Store/Context";
 import { Link } from 'react-router-dom';
 import { IoIosMenu } from "react-icons/io";
 
 
 const Header = ({toggleCart, toggleMobileMenu}) => {
-  const {cartItem} = useContext(CartContext)
   
   return (
     <header className="site-header">
@@ -39,7 +38,7 @@ const Header = ({toggleCart, toggleMobileMenu}) => {
           </div>
           <div className="cart_icon icon" onClick={toggleCart}>
             <CiShoppingCart />
-            <span>{cartItem.length}</span>
+            <span>0</span>
           </div>
         </div>
       </div>

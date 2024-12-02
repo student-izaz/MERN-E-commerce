@@ -3,14 +3,14 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import './index.css';
 import App from './App.jsx'
-import Main from './pages/Main.jsx';
 import CategoryPage from './pages/CategoryPage/CategoryPage.jsx';
 import CategoryList from './components/CategoryList/CategoryList.jsx';
 import LoginRegister from './components/CreateAccount.jsx/LoginRegister.jsx';
 import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx';
-// import OriginalPakistanWear from './pages/OriginalPakistanWearPage/OriginalPakistanWearPage.jsx';
 import OriginalPakistanWearPage from './pages/OriginalPakistanWearPage/OriginalPakistanWearPage.jsx';
 import FileUpload from './components/FileUpload/FileUpload.jsx';
+import { AuthProvider } from './Store/auth.jsx';
+import Logout from './components/Logout/Logout.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +34,10 @@ const router = createBrowserRouter([
         element: <LoginRegister/>
       },
       {
+        path: "/logout",
+        element: <Logout/>,
+      },
+      {
         path: "/product/:productId",
         element: <SingleProductPage/>
       },
@@ -51,7 +55,9 @@ const router = createBrowserRouter([
 
 
 createRoot(document.getElementById('root')).render(
+  <AuthProvider>
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>,
+  </AuthProvider>  
 )

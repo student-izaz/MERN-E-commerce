@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CiShoppingCart } from "react-icons/ci";
-import { addToCart, getCartItems } from "../../services/cartservice";
+import { addToCart } from "../../services/cartservice";
 import { useNavigate } from "react-router-dom";
 
 const SingleItem = ({ products }) => {

@@ -3,7 +3,6 @@ import Header from "./components/header/Header";
 import BottomMenu from "./components/BottomMenu/BottomMenu";
 import { Outlet } from "react-router-dom";
 import Cart from "./components/CartItems/Cart";
-import ContextProvider from "./Store/Context";
 import MobileMenu from "./components/MobileMenu/MobileMenu";
 
 const App = () => {
@@ -20,7 +19,6 @@ const App = () => {
 
   return (
     <div className="app">
-      <ContextProvider>
         <Header toggleCart={toggleCart} toggleMobileMenu={toggleMobileMenu}/>
         <MobileMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu}/>
         <Cart isOpen={isCartOpen} onClose={toggleCart} />
@@ -29,7 +27,6 @@ const App = () => {
         {isMobileMenuOpen && <div className="overlay" onClick={toggleMobileMenu}></div>}
         <Outlet />
         <BottomMenu />
-      </ContextProvider>
     </div>
   );
 };

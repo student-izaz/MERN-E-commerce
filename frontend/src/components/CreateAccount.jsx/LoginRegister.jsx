@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./LoginRegister.css";
+import { useAuth } from "../../Store/auth";
 
 const LoginRegister = () => {
     const [isLogin, setIsLogin] = useState(true);  // Toggle between login and register
@@ -8,6 +9,7 @@ const LoginRegister = () => {
     email: "",
     password: "",
   });
+  const { StoreTokenInLS } = useAuth();
 
   const handleChange = (e) => {
     setFormData({
@@ -27,18 +29,16 @@ const LoginRegister = () => {
 
     try {
       const response = await fetch(url, { method, headers, body });
-      const data = await response.json();
-      console.log(data)
-      alert(data.msg)
-    //   if (data.success) {
-    //     if (isLogin) {
-    //       onLogin(data);
-    //     } else {
-    //       onRegister(data);
-    //     }
-    //   } else {
-    //     alert(data.message);
-    //   }
+
+      if(response.ok){
+        const login_data = await response.json();
+        console.log(login_data)
+        StoreTokenInLS(login_data.token)
+        setFormData({
+          email: "",
+          password: "",
+        })
+      }
     } catch (error) {
       console.error("Error:", error);
       alert("Something went wrong!");
@@ -59,7 +59,7 @@ const LoginRegister = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                autoCompletes="email"
+                autoComplete="email"
               />
             </div>
             <div className="input-field">
@@ -70,7 +70,7 @@ const LoginRegister = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                autoComplete="password"
+                autoComplete="name"
               />
             </div>
             <div className="form-row">
@@ -94,7 +94,6 @@ const LoginRegister = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                autoComplete={false}
               />
             </div>
             <div className="input-field">
@@ -105,7 +104,6 @@ const LoginRegister = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                autoComplete={false}
               />
             </div>
             <div className="term-condition">
